@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/background_color"
+    android:layout_height="match_parent"
+    tools:context=".DetailActivity">
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Mistake Title"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:id="@+id/mistake_title"/>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/category_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/mistake_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@mipmap/ic_money"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Count: "
+        android:textStyle="italic"
+        android:id="@+id/mistake_count"
+        app:layout_constraintTop_toBottomOf="@+id/mistake_title"
+        app:layout_constraintStart_toEndOf="@+id/category_icon"
+        android:textColor="@color/white"
+        android:layout_marginStart="20dp"
+        android:textSize="14sp"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:hint="10"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey"
+        android:id="@+id/dialog_mistake_count"
+        app:layout_constraintTop_toBottomOf="@+id/mistake_title"
+        app:layout_constraintStart_toEndOf="@+id/mistake_count"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        />
+
+
+    <TextView
+        android:id="@+id/x0"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_count"
+        app:layout_constraintStart_toEndOf="@+id/category_icon"
+        android:layout_marginStart="20dp"
+        android:textSize="12sp"
+        android:textColor="#FFC107"
+        android:text="Mistake Category:"
+        />
+
+    <Spinner
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_count"
+        android:id="@+id/dialog_mistake_category"
+        android:layout_width="25dp"
+        android:background="@mipmap/ic_dropdown"
+        android:textSize="18sp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintStart_toEndOf="@+id/x0"
+        android:layout_height="25dp"
+        />
+
+    <TextView
+        android:id="@+id/x"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/x0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="14sp"
+        android:text="Mistake Detail:"
+        android:textColor="#FFC107"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+    <EditText
+        android:id="@+id/mistake_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/x"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:hint="Enter Mistake Details"
+        android:textSize="12sp"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/white"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+    <TextView
+        android:id="@+id/x1"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/mistake_detail"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:text="Mistake Lesson:"
+        android:textColor="#FFC107"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+    <EditText
+        android:id="@+id/mistake_lesson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/x1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Lesson Learnt from Mistake"
+        android:textColorHint="@color/grey"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        app:layout_constraintTop_toBottomOf="@+id/mistake_lesson"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:id="@+id/mistake_update"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

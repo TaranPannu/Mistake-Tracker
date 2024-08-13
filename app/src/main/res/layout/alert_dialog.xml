@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/background_color"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Mistake Title"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textColorHint="@color/grey"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:id="@+id/dialog_mistake_title"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/category_icon"
+        android:layout_width="55dp"
+        android:layout_height="58dp"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@mipmap/ic_money"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"/>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Count: "
+    android:textStyle="italic"
+    android:id="@+id/dialog_mistake_count1"
+    app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_title"
+    app:layout_constraintStart_toEndOf="@+id/category_icon"
+    android:textColor="@color/ic_add_background"
+    android:layout_marginStart="10dp"
+    android:textSize="12sp"
+    android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:hint="10"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey"
+        android:id="@+id/dialog_mistake_count"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_title"
+        app:layout_constraintStart_toEndOf="@+id/dialog_mistake_count1"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/x0"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginStart="10dp"
+        android:text="Mistake Category:"
+        android:textColor="#FFC107"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintStart_toEndOf="@+id/category_icon"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_count" />
+
+    <Spinner
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_count"
+        android:id="@+id/dialog_mistake_category"
+        android:layout_width="25dp"
+        android:background="@mipmap/ic_dropdown"
+android:layout_marginLeft="5dp"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/x0"
+        android:layout_height="25dp"
+      />
+<!--    <Spinner-->
+<!--        android:id="@+id/coursesspinner"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_width="160dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"/>-->
+
+    <TextView
+        android:id="@+id/x"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/x0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="14sp"
+        android:text="Mistake Detail:"
+        android:textColor="#FFC107"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+    <EditText
+        android:id="@+id/dialog_mistake_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/x"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Mistake Details"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+    <TextView
+        android:id="@+id/x1"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_detail"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:text="Mistake Lesson:"
+        android:textColor="#FFC107"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+    <EditText
+        android:id="@+id/dialog_mistake_lesson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/x1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Lesson Learnt from Mistake"
+        android:textSize="12sp"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/white"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:text="Add Mistake"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_lesson"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:id="@+id/dialog_button"/>
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/dialog_title"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Add Mistake"-->
+<!--        android:textColor="#FFEB3B"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:paddingBottom="8dp"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/dialog_mistake_title"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:textColorHint="@color/white"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Mistake Title"/>-->
+<!--    <EditText-->
+<!--        android:id="@+id/dialog_mistake_category"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:textColorHint="@color/white"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Mistake Category"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/dialog_mistake_count"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:textColorHint="@color/white"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Mistake Count"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/dialog_mistake_detail"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textColorHint="@color/white"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Mistake Detail"/>-->
+<!--    <EditText-->
+<!--    android:id="@+id/dialog_mistake_lesson"-->
+<!--    android:layout_width="match_parent"-->
+<!--        android:textColor="@color/white"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:textColorHint="@color/white"-->
+<!--    android:hint="Mistake Lesson Learnt"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/dialog_button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Add"-->
+<!--        android:layout_marginTop="16dp"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
