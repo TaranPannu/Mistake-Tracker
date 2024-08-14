@@ -9,7 +9,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.mistaketracker"
+        applicationId = "com.taran.mistaketracker"
         minSdk = 25
         targetSdk = 34
         versionCode = 1

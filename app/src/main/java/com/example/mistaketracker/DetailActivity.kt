@@ -79,6 +79,8 @@ img.setOnClickListener()
         val items = listOf(
             "Category not Selected",
             "other",
+            "School",
+            "Studies",
             "Relationship",
             "Finance",
             "Health",
