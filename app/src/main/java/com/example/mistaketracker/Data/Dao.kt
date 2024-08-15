@@ -21,4 +21,7 @@ interface Dao {
 
     @Query("SELECT * FROM MistakeTable WHERE id = :id")
      fun getMistakeById(id: Long): Mistake
+
+    @Query("SELECT * FROM MistakeTable")     // we need it for testing
+    fun getAllMistakesNonLiveData():List<Mistake>
 }

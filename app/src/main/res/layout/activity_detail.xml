@@ -37,13 +37,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Count: "
-        android:textStyle="italic"
+        android:textStyle="bold"
+
         android:id="@+id/mistake_count"
         app:layout_constraintTop_toBottomOf="@+id/mistake_title"
         app:layout_constraintStart_toEndOf="@+id/category_icon"
-        android:textColor="@color/white"
+        android:textColor="#FFC107"
         android:layout_marginStart="20dp"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:layout_marginTop="30dp"/>
 
     <EditText
@@ -57,7 +58,7 @@
         android:id="@+id/dialog_mistake_count"
         app:layout_constraintTop_toBottomOf="@+id/mistake_title"
         app:layout_constraintStart_toEndOf="@+id/mistake_count"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:layout_marginTop="20dp"
         />
 
@@ -78,12 +79,12 @@
     <Spinner
         app:layout_constraintTop_toBottomOf="@+id/dialog_mistake_count"
         android:id="@+id/dialog_mistake_category"
-        android:layout_width="25dp"
+        android:layout_width="15dp"
         android:background="@mipmap/ic_dropdown"
         android:textSize="18sp"
         android:layout_marginLeft="5dp"
         app:layout_constraintStart_toEndOf="@+id/x0"
-        android:layout_height="25dp"
+        android:layout_height="13dp"
         />
 
     <TextView
@@ -108,13 +109,19 @@
         app:layout_constraintTop_toBottomOf="@+id/x"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:hint="Enter Mistake Details"
-        android:textSize="12sp"
+        android:hint="Enter notes here..."
         android:textColorHint="@color/grey"
+        android:textSize="14sp"
         android:textColor="@color/white"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
+        android:scrollbars="vertical"
+        android:minLines="5"
+        android:padding="10dp"
         />
+
     <TextView
         android:id="@+id/x1"
         android:textStyle="bold"
@@ -138,12 +145,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="5dp"
-        android:hint="Enter Lesson Learnt from Mistake"
+        android:hint="Enter Lesson Learnt from Mistake..."
         android:textColorHint="@color/grey"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textColor="@color/white"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
+        android:scrollbars="vertical"
+        android:minLines="5"
+        android:padding="10dp"
         />
 
     <Button
