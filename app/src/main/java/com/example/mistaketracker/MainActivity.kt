@@ -14,7 +14,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
@@ -28,28 +27,31 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mistaketracker.Adapters.VPAdapter
 import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Data.MistakeDatabase
-import com.example.mistaketracker.Data.MistakeViewModel
-import com.example.mistaketracker.Data.MistakeViewModelFactory
-import com.example.mistaketracker.Data.Repo
+import com.example.mistaketracker.Room.MistakeDatabase
+import com.example.mistaketracker.MVVM.MistakeViewModel
+import com.example.mistaketracker.MVVM.MistakeViewModelFactory
+import com.example.mistaketracker.MVVM.Repo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    @Inject lateinit var mistakeViewModel: MistakeViewModel
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
     lateinit var VP_Adapter: VPAdapter
     lateinit var floatingActionButton: FloatingActionButton
 
-    lateinit var mistakeViewModel: MistakeViewModel
-    lateinit var repo: Repo
-    lateinit var mistakeDatabase: MistakeDatabase
-    lateinit var mistakeViewModelFactory: MistakeViewModelFactory
+//    lateinit var mistakeViewModel: MistakeViewModel
+//    lateinit var repo: Repo
+//    lateinit var mistakeDatabase: MistakeDatabase
+//    lateinit var mistakeViewModelFactory: MistakeViewModelFactory
     var ImagePath:String =""
     lateinit var img: ImageView
     lateinit var  floatLayout: TextView
@@ -190,10 +192,10 @@ show = false
         viewPager.adapter = VP_Adapter
         floatLayout=findViewById(R.id.float_text)
 
-        mistakeDatabase = MistakeDatabase(this)
-        repo = Repo(mistakeDatabase.getMistakeDao())
-        mistakeViewModelFactory = MistakeViewModelFactory(repo)
-        mistakeViewModel = ViewModelProvider(this, mistakeViewModelFactory).get(MistakeViewModel::class.java)
+//        mistakeDatabase = MistakeDatabase(this)
+//        repo = Repo(mistakeDatabase.getMistakeDao())
+//        mistakeViewModelFactory = MistakeViewModelFactory(repo)
+        //mistakeViewModel = ViewModelProvider(this, mistakeViewModelFactory).get(MistakeViewModel::class.java)
     }
     private fun getImgFromGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

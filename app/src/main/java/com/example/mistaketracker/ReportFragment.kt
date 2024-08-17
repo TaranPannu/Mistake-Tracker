@@ -3,24 +3,20 @@ package com.example.mistaketracker
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.mistaketracker.Adapters.DetailAdapter
 import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Data.MistakeDatabase
+import com.example.mistaketracker.Room.MistakeDatabase
 import com.example.mistaketracker.Data.MistakeReport
-import com.example.mistaketracker.Data.MistakeViewModel
-import com.example.mistaketracker.Data.MistakeViewModelFactory
-import com.example.mistaketracker.Data.Repo
+import com.example.mistaketracker.MVVM.MistakeViewModel
+import com.example.mistaketracker.MVVM.MistakeViewModelFactory
+import com.example.mistaketracker.MVVM.Repo
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -28,8 +24,6 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class DetailFragment : Fragment() {

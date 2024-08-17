@@ -1,4 +1,4 @@
-package com.example.mistaketracker.Data
+package com.example.mistaketracker.MVVM
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

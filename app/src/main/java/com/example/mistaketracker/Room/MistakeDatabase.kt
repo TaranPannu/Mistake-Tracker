@@ -1,9 +1,10 @@
-package com.example.mistaketracker.Data
+package com.example.mistaketracker.Room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.mistaketracker.Data.Mistake
 
 @Database(entities = [Mistake::class],
     version = 1,

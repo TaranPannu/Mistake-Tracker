@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -38,6 +40,10 @@ android {
 
 dependencies {
 
+
+    val kotlin_version ="1.8.0"
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
@@ -48,7 +54,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
-    val room_version = "2.4.3"
+    val room_version = "2.5.0"
 
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
@@ -64,4 +70,11 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
     androidTestImplementation("androidx.test:rules:1.5.0")
     testImplementation("org.robolectric:robolectric:4.10.3")
+
+    implementation("com.google.dagger:hilt-android:2.52")
+    kapt("com.google.dagger:hilt-android-compiler:2.52")
+    annotationProcessor ("com.google.dagger:hilt-compiler:2.52")
+
+
+
 }

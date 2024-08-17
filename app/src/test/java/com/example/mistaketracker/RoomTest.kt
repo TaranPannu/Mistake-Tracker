@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.mistaketracker.Data.Dao
+import com.example.mistaketracker.Room.Dao
 import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Data.MistakeDatabase
+import com.example.mistaketracker.Room.MistakeDatabase
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -24,7 +24,7 @@ class RoomTest {
         fun setUp()
         {
             val context = ApplicationProvider.getApplicationContext<Context>()
-            database = Room.inMemoryDatabaseBuilder(context,MistakeDatabase::class.java).build()
+            database = Room.inMemoryDatabaseBuilder(context, MistakeDatabase::class.java).build()
             dao = database.getMistakeDao()
         }
         // Will test adding and fetching Note

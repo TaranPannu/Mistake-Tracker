@@ -1,16 +1,13 @@
 package com.example.mistaketracker
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -20,24 +17,18 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Data.MistakeDatabase
-import com.example.mistaketracker.Data.MistakeViewModel
-import com.example.mistaketracker.Data.MistakeViewModelFactory
-import com.example.mistaketracker.Data.Repo
+import com.example.mistaketracker.Room.MistakeDatabase
+import com.example.mistaketracker.MVVM.MistakeViewModel
+import com.example.mistaketracker.MVVM.MistakeViewModelFactory
+import com.example.mistaketracker.MVVM.Repo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import android.Manifest
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import androidx.core.app.ActivityCompat
-import java.io.File
 
 class DetailActivity : AppCompatActivity() {
 

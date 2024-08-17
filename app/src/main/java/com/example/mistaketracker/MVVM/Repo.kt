@@ -1,8 +1,12 @@
-package com.example.mistaketracker.Data
+package com.example.mistaketracker.MVVM
 
 import androidx.lifecycle.LiveData
+import com.example.mistaketracker.Data.Mistake
+import com.example.mistaketracker.Room.Dao
+import javax.inject.Inject
 
-class Repo(var dao: Dao) {
+
+class Repo @Inject constructor(var dao: Dao) {
 
     fun insert(mistake: Mistake)
     {

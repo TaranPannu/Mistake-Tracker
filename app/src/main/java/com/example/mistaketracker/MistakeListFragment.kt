@@ -1,30 +1,23 @@
 package com.example.mistaketracker
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mistaketracker.Adapters.RecyclerViewAdapter
-import com.example.mistaketracker.Data.Dao
+import com.example.mistaketracker.Room.Dao
 import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Data.MistakeDatabase
-import com.example.mistaketracker.Data.MistakeViewModel
-import com.example.mistaketracker.Data.MistakeViewModelFactory
-import com.example.mistaketracker.Data.Repo
+import com.example.mistaketracker.Room.MistakeDatabase
+import com.example.mistaketracker.MVVM.MistakeViewModel
+import com.example.mistaketracker.MVVM.MistakeViewModelFactory
+import com.example.mistaketracker.MVVM.Repo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -32,7 +25,7 @@ import kotlinx.coroutines.launch
 class MistakeListFragment : Fragment(), ClickToOpenDetailActivity {
 lateinit var recyclerView: RecyclerView
 lateinit var mistakeDatabase: MistakeDatabase
-lateinit var mistake_dao:Dao
+lateinit var mistake_dao: Dao
 
     lateinit var mistakeViewModel: MistakeViewModel
     lateinit var repo: Repo
