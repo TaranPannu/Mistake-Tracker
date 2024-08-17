@@ -24,15 +24,15 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.random.Random
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
-
-    lateinit var pieChart: PieChart
+    @Inject
     lateinit var mistakeViewModel: MistakeViewModel
-    lateinit var repo: Repo
-    lateinit var mistakeDatabase: MistakeDatabase
-    lateinit var mistakeViewModelFactory: MistakeViewModelFactory
+    lateinit var pieChart: PieChart
     lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -70,12 +70,6 @@ class DetailFragment : Fragment() {
     fun init(view: View)
     {
         pieChart = view.findViewById(R.id.pieChart)
-        mistakeDatabase = MistakeDatabase(view.context)
-        repo = Repo(mistakeDatabase.getMistakeDao())
-        mistakeViewModelFactory = MistakeViewModelFactory(repo)
-        mistakeViewModel = ViewModelProvider(this, mistakeViewModelFactory).get(MistakeViewModel::class.java)
-
-
         recyclerView = view.findViewById(R.id.rcy_detail)
     }
 

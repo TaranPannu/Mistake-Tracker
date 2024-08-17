@@ -41,53 +41,50 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    @Inject lateinit var mistakeViewModel: MistakeViewModel
+    @Inject
+    lateinit var mistakeViewModel: MistakeViewModel
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
     lateinit var VP_Adapter: VPAdapter
     lateinit var floatingActionButton: FloatingActionButton
 
-//    lateinit var mistakeViewModel: MistakeViewModel
-//    lateinit var repo: Repo
-//    lateinit var mistakeDatabase: MistakeDatabase
-//    lateinit var mistakeViewModelFactory: MistakeViewModelFactory
-    var ImagePath:String =""
+    var ImagePath: String = ""
     lateinit var img: ImageView
-    lateinit var  floatLayout: TextView
+    lateinit var floatLayout: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(!checkPermission())
+        if (!checkPermission())
             requestPermission()
 
         init()
-        TabLayoutMediator(tabLayout,viewPager)
-        {
-                tab: TabLayout.Tab, position: Int ->
-            when(position)
-            {
+        TabLayoutMediator(tabLayout, viewPager)
+        { tab: TabLayout.Tab, position: Int ->
+            when (position) {
                 0 -> tab.text = "Mistakes"
                 else -> tab.text = "Report"
             }
         }.attach()
-floatingActionButton.setOnClickListener()
-{
-    showCustomDialog()
-}
-floatLayout.setOnClickListener()
-{
+        floatingActionButton.setOnClickListener()
+        {
             showCustomDialog()
-}
+        }
+        floatLayout.setOnClickListener()
+        {
+            showCustomDialog()
+        }
     }
+
     private fun checkPermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             this,
             Manifest.permission.READ_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
     }
+
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,
@@ -95,6 +92,7 @@ floatLayout.setOnClickListener()
             111
         )
     }
+
     private fun showCustomDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.alert_dialog, null)
 
@@ -106,19 +104,19 @@ floatLayout.setOnClickListener()
         val dialogTitle = dialogView.findViewById<EditText>(R.id.dialog_mistake_title)
         val spinner = dialogView.findViewById<Spinner>(R.id.dialog_mistake_category)
         val category = dialogView.findViewById<TextView>(R.id.x0)
-
         val count = dialogView.findViewById<EditText>(R.id.dialog_mistake_count)
         val detail = dialogView.findViewById<EditText>(R.id.dialog_mistake_detail)
         val lesson = dialogView.findViewById<EditText>(R.id.dialog_mistake_lesson)
         val dialogButton = dialogView.findViewById<Button>(R.id.dialog_button)
-        img= dialogView.findViewById(R.id.category_icon)
+
+        img = dialogView.findViewById(R.id.category_icon)
         img.setOnClickListener()
         {
             getImgFromGallery()
 
         }
-        category.setOnClickListener(){
-            Toast.makeText(this,"Click the arrow ▼",Toast.LENGTH_SHORT).show()
+        category.setOnClickListener() {
+            Toast.makeText(this, "Click the arrow ▼", Toast.LENGTH_SHORT).show()
         }
         val items = listOf(
             "Category not Selected",
@@ -138,30 +136,34 @@ floatLayout.setOnClickListener()
             "Home Management",
             "Self-Care",
             "Social Interactions",
-            "A","B","C","D","E","F","G","H","J","k"
+            "A", "B", "C", "D", "E", "F", "G", "H", "J", "k"
         )
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter= adapter
+        spinner.adapter = adapter
         spinner.setSelection(-1)
         var show = true
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 category.text = selectedItem
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
-          dialogButton.setOnClickListener {
-              if(!(dialogTitle.text.toString() == "" || category.text.toString() =="" || count.text.toString() ==""||detail.text.toString()==""||lesson.text.toString()=="" ))
-              {
-show = false
-              }
-            lifecycleScope.launch(Dispatchers.IO){
+        dialogButton.setOnClickListener {
+            if (!(dialogTitle.text.toString() == "" || category.text.toString() == "" || count.text.toString() == "" || detail.text.toString() == "" || lesson.text.toString() == "")) {
+                show = false
+            }
+            lifecycleScope.launch(Dispatchers.IO) {
                 val uniqueId = System.currentTimeMillis()
-                if(!(dialogTitle.text.toString() == "" || category.text.toString() =="" || count.text.toString() ==""||detail.text.toString()==""||lesson.text.toString()==""))
-                {
+                if (!(dialogTitle.text.toString() == "" || category.text.toString() == "" || count.text.toString() == "" || detail.text.toString() == "" || lesson.text.toString() == "")) {
                     mistakeViewModel.insert(
                         Mistake(
                             0,
@@ -169,34 +171,35 @@ show = false
                             category.text.toString(),
                             count.text.toString(),
                             detail.text.toString(),
-                            lesson.text.toString(),ImagePath
+                            lesson.text.toString(), ImagePath
                         )
                     )
                     dialog.dismiss()
                 }
             }
-              if(show)
-                  Toast.makeText(this@MainActivity,"Fill in the required details",Toast.LENGTH_SHORT).show()
-              else
-                  Toast.makeText(this@MainActivity,"Mistake successfully saved",Toast.LENGTH_SHORT).show()
+            if (show)
+                Toast.makeText(
+                    this@MainActivity,
+                    "Fill in the required details",
+                    Toast.LENGTH_SHORT
+                ).show()
+            else
+                Toast.makeText(this@MainActivity, "Mistake successfully saved", Toast.LENGTH_SHORT)
+                    .show()
         }
         dialog.show()
     }
 
-    fun init()
-    {
+    fun init() {
         VP_Adapter = VPAdapter(this)
         tabLayout = findViewById(R.id.tab_layout)
         viewPager = findViewById(R.id.View_pager2)
         floatingActionButton = findViewById(R.id.float_btn)
         viewPager.adapter = VP_Adapter
-        floatLayout=findViewById(R.id.float_text)
+        floatLayout = findViewById(R.id.float_text)
 
-//        mistakeDatabase = MistakeDatabase(this)
-//        repo = Repo(mistakeDatabase.getMistakeDao())
-//        mistakeViewModelFactory = MistakeViewModelFactory(repo)
-        //mistakeViewModel = ViewModelProvider(this, mistakeViewModelFactory).get(MistakeViewModel::class.java)
     }
+
     private fun getImgFromGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galleryIntent, 101)
@@ -211,7 +214,7 @@ show = false
             // Get the image path from the URI
             val imagePath = getRealPathFromURI(imageUri)
             if (imagePath != null) {
-                ImagePath= imagePath
+                ImagePath = imagePath
             } else {
                 Log.e("Image Path", "Could not get the image path")
             }
@@ -242,12 +245,11 @@ show = false
 }
 
 
-interface ClickToOpenDetailActivity
-{
+interface ClickToOpenDetailActivity {
     fun onClickDetailOpen(mistake: Mistake)
     fun onClickIncreaseCount(mistake: Mistake)
     fun onClickDecreaseCount(mistake: Mistake)
-    fun onClickDeleteMistake(mistake: Mistake, x: Int )
+    fun onClickDeleteMistake(mistake: Mistake, x: Int)
     fun onClickUpdateMistake(mistake: Mistake)
 
     fun onImgClicked()

@@ -29,14 +29,14 @@ import kotlinx.coroutines.launch
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
+    @Inject
     lateinit var mistakeViewModel: MistakeViewModel
-    lateinit var repo: Repo
-    lateinit var mistakeDatabase: MistakeDatabase
-    lateinit var mistakeViewModelFactory: MistakeViewModelFactory
-
 
     private lateinit var dialogTitle: EditText
     private lateinit var spinner: Spinner
@@ -46,26 +46,26 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var lesson: EditText
     private lateinit var dialogButton: Button
     private lateinit var img: ImageView
-    var img_path:String? = ""
+    var img_path: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         init()
-img.setOnClickListener()
-{
-    getImgFromGallery()
+        img.setOnClickListener()
+        {
+            getImgFromGallery()
 
-}
+        }
 
-        val mistake_id:Long = intent.getLongExtra("key",0L)
-        lifecycleScope.launch(Dispatchers.IO){
+        val mistake_id: Long = intent.getLongExtra("key", 0L)
+        lifecycleScope.launch(Dispatchers.IO) {
             val mistake = mistakeViewModel.getMistakebyId(mistake_id)
             UpdateCurrentMistakeData(mistake)
         }
 
-        category.setOnClickListener(){
-            Toast.makeText(this,"Click the arrow ▼",Toast.LENGTH_SHORT).show()
+        category.setOnClickListener() {
+            Toast.makeText(this, "Click the arrow ▼", Toast.LENGTH_SHORT).show()
         }
         val items = listOf(
             "Category not Selected",
@@ -87,32 +87,35 @@ img.setOnClickListener()
             "Home Management",
             "Self-Care",
             "Social Interactions",
-            "A","B","C","D","E","F","G","H","J","k"
+            "A", "B", "C", "D", "E", "F", "G", "H", "J", "k"
         )
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter= adapter
+        spinner.adapter = adapter
         spinner.setSelection(0)
         var show = true
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
-                if (position !=0)
-                 category.text = selectedItem
+                if (position != 0)
+                    category.text = selectedItem
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
         dialogButton.setOnClickListener {
-            if(!(dialogTitle.text.toString() == "" || category.text.toString() =="" || count.text.toString() ==""||detail.text.toString()==""||lesson.text.toString()==""))
-            {
+            if (!(dialogTitle.text.toString() == "" || category.text.toString() == "" || count.text.toString() == "" || detail.text.toString() == "" || lesson.text.toString() == "")) {
                 show = false
             }
 
-            lifecycleScope.launch(Dispatchers.IO){
-                val uniqueId = System.currentTimeMillis()
-                if(!(dialogTitle.text.toString() == "" || category.text.toString() =="" || count.text.toString() ==""||detail.text.toString()==""||lesson.text.toString()==""))
-                {
+            lifecycleScope.launch(Dispatchers.IO) {
+                if (!(dialogTitle.text.toString() == "" || category.text.toString() == "" || count.text.toString() == "" || detail.text.toString() == "" || lesson.text.toString() == "")) {
                     mistakeViewModel.update(
                         Mistake(
                             mistake_id,
@@ -120,19 +123,28 @@ img.setOnClickListener()
                             category.text.toString(),
                             count.text.toString(),
                             detail.text.toString(),
-                            lesson.text.toString(),img_path.toString()
+                            lesson.text.toString(), img_path.toString()
                         )
                     )
                 }
             }
-            if(show)
-                Toast.makeText(this@DetailActivity,"Fill in the required details", Toast.LENGTH_SHORT).show()
+            if (show)
+                Toast.makeText(
+                    this@DetailActivity,
+                    "Fill in the required details",
+                    Toast.LENGTH_SHORT
+                ).show()
             else
-                Toast.makeText(this@DetailActivity,"Mistake successfully saved", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@DetailActivity,
+                    "Mistake successfully saved",
+                    Toast.LENGTH_SHORT
+                ).show()
         }
 
 
     }
+
     private fun getImgFromGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galleryIntent, 101)
@@ -143,10 +155,11 @@ img.setOnClickListener()
         if (requestCode == 101 && resultCode == RESULT_OK) {
             val imageUri = data?.data
             img.setImageURI(imageUri)
-            img_path =  getRealPathFromURI(imageUri)
+            img_path = getRealPathFromURI(imageUri)
 
         }
     }
+
     private fun getRealPathFromURI(uri: Uri?): String? {
         var path: String? = null
         uri?.let {
@@ -171,21 +184,27 @@ img.setOnClickListener()
         img_path = mistake.img_path
 
         val bitmap = if (mistake.img_path.isNullOrEmpty()) {
-            addBackgroundColorToBitmap(createBitmapWithText(mistake.category[0].toString()), Color.GREEN)
+            addBackgroundColorToBitmap(
+                createBitmapWithText(mistake.category[0].toString()),
+                Color.GREEN
+            )
         } else {
             val loadedBitmap = loadImageFromPath(mistake.img_path)
             if (loadedBitmap != null) {
                 loadedBitmap
             } else {
-                addBackgroundColorToBitmap(createBitmapWithText(mistake.category[0].toString()), Color.GREEN)
+                addBackgroundColorToBitmap(
+                    createBitmapWithText(mistake.category[0].toString()),
+                    Color.GREEN
+                )
             }
         }
         img.setImageBitmap(bitmap)
     }
 
     private fun loadImageFromPath(imagePath: String): Bitmap? {
-        val bitmap= BitmapFactory.decodeFile(imagePath)
-        return  bitmap
+        val bitmap = BitmapFactory.decodeFile(imagePath)
+        return bitmap
     }
 
 
@@ -199,6 +218,7 @@ img.setOnClickListener()
         canvas.drawText(text, 17f, bitmap.height / 2f + 10f, paint)
         return bitmap
     }
+
     fun addBackgroundColorToBitmap(bitmap: Bitmap, backgroundColor: Int): Bitmap {
         val width = bitmap.width
         val height = bitmap.height
@@ -215,13 +235,8 @@ img.setOnClickListener()
 
         return newBitmap
     }
-    fun init()
-    {
-        mistakeDatabase = MistakeDatabase(this)
-        repo = Repo(mistakeDatabase.getMistakeDao())
-        mistakeViewModelFactory = MistakeViewModelFactory(repo)
-        mistakeViewModel = ViewModelProvider(this, mistakeViewModelFactory).get(MistakeViewModel::class.java)
 
+    fun init() {
         dialogTitle = findViewById(R.id.mistake_title)
         spinner = findViewById(R.id.dialog_mistake_category)
         category = findViewById(R.id.x0) // Assuming x0 is a valid ID
