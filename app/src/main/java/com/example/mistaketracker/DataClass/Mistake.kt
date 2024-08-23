@@ -1,4 +1,4 @@
-package com.example.mistaketracker.Data
+package com.example.mistaketracker.DataClass
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -12,4 +12,6 @@ data class Mistake(
     var count:String,
     var detail:String,
     var lesson:String,
-    val img_path:String )
+    val img_path:String,
+    var timestamp: Long
+)

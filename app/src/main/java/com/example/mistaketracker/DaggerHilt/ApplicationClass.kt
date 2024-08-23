@@ -1,4 +1,4 @@
-package com.example.mistaketracker.DepInjec
+package com.example.mistaketracker.DaggerHilt
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

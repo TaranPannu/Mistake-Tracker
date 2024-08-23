@@ -7,17 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mistaketracker.Adapters.RecyclerViewAdapter
-import com.example.mistaketracker.Room.Dao
-import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Room.MistakeDatabase
+import com.example.mistaketracker.DataClass.Mistake
 import com.example.mistaketracker.MVVM.MistakeViewModel
-import com.example.mistaketracker.MVVM.MistakeViewModelFactory
-import com.example.mistaketracker.MVVM.Repo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,6 +54,7 @@ class MistakeListFragment : Fragment(), ClickToOpenDetailActivity {
 
     override fun onClickIncreaseCount(mistake: Mistake) {
         lifecycleScope.launch(Dispatchers.IO) {
+            mistake.timestamp = System.currentTimeMillis()
             mistake.count = ((mistake.count).toInt() + 1).toString()
             mistakeViewModel.update(mistake)
         }
@@ -67,9 +63,8 @@ class MistakeListFragment : Fragment(), ClickToOpenDetailActivity {
 
     override fun onClickDecreaseCount(mistake: Mistake) {
         lifecycleScope.launch(Dispatchers.IO) {
+            mistake.timestamp = System.currentTimeMillis()
             mistake.count = ((mistake.count).toInt() - 1).toString()
-
-
             mistakeViewModel.update(mistake)
         }
         Toast.makeText(context, "Mistake Count Decreased", Toast.LENGTH_SHORT).show()

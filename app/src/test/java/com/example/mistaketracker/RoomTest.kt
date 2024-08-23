@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.mistaketracker.Room.Dao
-import com.example.mistaketracker.Data.Mistake
+import com.example.mistaketracker.DataClass.Mistake
 import com.example.mistaketracker.Room.MistakeDatabase
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers

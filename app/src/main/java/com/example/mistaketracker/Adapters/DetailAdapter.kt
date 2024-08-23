@@ -11,8 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Data.MistakeReport
+import com.example.mistaketracker.DataClass.MistakeReport
 import com.example.mistaketracker.R
 
 class DetailAdapter(var list: List<MistakeReport>, var color_list:ArrayList<Int>):RecyclerView.Adapter<DetailAdapter.ViewHolder>() {

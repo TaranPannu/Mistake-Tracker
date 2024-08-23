@@ -13,21 +13,18 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="$USER_HOME$/.android/avd/Pixel_2_API_32...avd" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_3a_API_32.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-07-20T22:26:37.367762Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-08-21T11:23:39.227452Z" />
         </State>
       </entry>
       <entry key="test_appOpenedRVShown()">
         <State />
       </entry>
       <entry key="test_appOpenedRVShown__mistake_Report_frag()">
-        <State />
-      </entry>
-      <entry key="test_appOpenedRVShown_mistake_list_frag()">
         <State />
       </entry>
     </value>

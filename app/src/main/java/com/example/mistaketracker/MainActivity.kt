@@ -22,15 +22,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mistaketracker.Adapters.VPAdapter
-import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Room.MistakeDatabase
+import com.example.mistaketracker.DataClass.Mistake
 import com.example.mistaketracker.MVVM.MistakeViewModel
-import com.example.mistaketracker.MVVM.MistakeViewModelFactory
-import com.example.mistaketracker.MVVM.Repo
+import com.example.mistaketracker.Services.DataSyncService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewPager: ViewPager2
     lateinit var VP_Adapter: VPAdapter
     lateinit var floatingActionButton: FloatingActionButton
-
+    lateinit var floatingActionButton_Sync: FloatingActionButton
     var ImagePath: String = ""
     lateinit var img: ImageView
     lateinit var floatLayout: TextView
@@ -61,6 +58,11 @@ class MainActivity : AppCompatActivity() {
             requestPermission()
 
         init()
+//        floatingActionButton_Sync =findViewById(R.id.float_btn_sync)
+//        floatingActionButton_Sync.setOnClickListener()
+//        {
+//
+//        }
         TabLayoutMediator(tabLayout, viewPager)
         { tab: TabLayout.Tab, position: Int ->
             when (position) {
@@ -162,6 +164,8 @@ class MainActivity : AppCompatActivity() {
                 show = false
             }
             lifecycleScope.launch(Dispatchers.IO) {
+                val timestamp = System.currentTimeMillis();
+
                 val uniqueId = System.currentTimeMillis()
                 if (!(dialogTitle.text.toString() == "" || category.text.toString() == "" || count.text.toString() == "" || detail.text.toString() == "" || lesson.text.toString() == "")) {
                     mistakeViewModel.insert(
@@ -171,8 +175,9 @@ class MainActivity : AppCompatActivity() {
                             category.text.toString(),
                             count.text.toString(),
                             detail.text.toString(),
-                            lesson.text.toString(), ImagePath
-                        )
+                            lesson.text.toString(), ImagePath, timestamp
+
+                    )
                     )
                     dialog.dismiss()
                 }
@@ -242,8 +247,19 @@ class MainActivity : AppCompatActivity() {
 //        img.setImageBitmap(bitmap)
     }
 
-}
+    fun xx(view: View) {
 
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            mistakeViewModel.createNewEmployee(Mistake(18L,"","","","","","",12L))
+//        }
+        Log.d("s2","Start sssss")
+        startService(Intent(this, DataSyncService::class.java))
+//        startService(Intent(this, NewService::class.java))
+
+        Log.d("s2","end sssss")
+
+    }
+}
 
 interface ClickToOpenDetailActivity {
     fun onClickDetailOpen(mistake: Mistake)

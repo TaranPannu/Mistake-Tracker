@@ -1,6 +1,5 @@
 package com.example.mistaketracker.Adapters
 
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -12,11 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.mistaketracker.ClickToOpenDetailActivity
-import com.example.mistaketracker.Data.Mistake
+import com.example.mistaketracker.DataClass.Mistake
 import com.example.mistaketracker.R
 import java.io.File
 import kotlin.random.Random

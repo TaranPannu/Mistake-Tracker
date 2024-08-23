@@ -17,13 +17,9 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.mistaketracker.Data.Mistake
-import com.example.mistaketracker.Room.MistakeDatabase
+import com.example.mistaketracker.DataClass.Mistake
 import com.example.mistaketracker.MVVM.MistakeViewModel
-import com.example.mistaketracker.MVVM.MistakeViewModelFactory
-import com.example.mistaketracker.MVVM.Repo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.graphics.Canvas
@@ -57,6 +53,9 @@ class DetailActivity : AppCompatActivity() {
             getImgFromGallery()
 
         }
+//        val sharedPreferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+//        val savedValue = sharedPreferences.getString("key", "default_value")
+//        Log.d("s23",savedValue.toString())
 
         val mistake_id: Long = intent.getLongExtra("key", 0L)
         lifecycleScope.launch(Dispatchers.IO) {
@@ -115,6 +114,11 @@ class DetailActivity : AppCompatActivity() {
             }
 
             lifecycleScope.launch(Dispatchers.IO) {
+                val timestamp = System.currentTimeMillis();
+//                val sharedPreferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+//                val editor = sharedPreferences.edit()
+//                editor.putLong("Time_Stamp", timestamp)
+//                editor.apply()
                 if (!(dialogTitle.text.toString() == "" || category.text.toString() == "" || count.text.toString() == "" || detail.text.toString() == "" || lesson.text.toString() == "")) {
                     mistakeViewModel.update(
                         Mistake(
@@ -123,7 +127,7 @@ class DetailActivity : AppCompatActivity() {
                             category.text.toString(),
                             count.text.toString(),
                             detail.text.toString(),
-                            lesson.text.toString(), img_path.toString()
+                            lesson.text.toString(), img_path.toString(),timestamp
                         )
                     )
                 }

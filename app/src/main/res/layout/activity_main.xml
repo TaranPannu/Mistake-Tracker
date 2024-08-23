@@ -28,7 +28,16 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/float_btn_sync"
+        android:onClick="xx"
+        android:backgroundTint="#FBE62A"
+        android:src="@android:color/transparent"
+        />
     <FrameLayout
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

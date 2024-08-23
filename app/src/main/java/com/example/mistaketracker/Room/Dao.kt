@@ -7,7 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.mistaketracker.Data.Mistake
+import com.example.mistaketracker.DataClass.Mistake
 
 @Dao
 interface Dao {
@@ -25,4 +25,9 @@ interface Dao {
 
     @Query("SELECT * FROM MistakeTable")     // we need it for testing
     fun getAllMistakesNonLiveData():List<Mistake>
+
+    @Query("SELECT * FROM MistakeTable WHERE timestamp >= :timestamp")
+    fun getMistakebyTimeStamp(timestamp: Long): List<Mistake>
+
+
 }
