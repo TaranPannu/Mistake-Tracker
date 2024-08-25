@@ -30,14 +30,14 @@ class RoomTest {
         // Will test adding and fetching Note
         @Test
         fun add_mistake_to_database() = runBlocking(Dispatchers.IO) {// we are accessing database so we need background thread
-            val mistake =Mistake(9997392, "dd","ss","1","ww","","")
+            val mistake =Mistake(9997392, "dd","ss","1","ww","","",0L)
             dao.insert(mistake)
             val mistakes = dao.getAllMistakesNonLiveData()
             TestCase.assertTrue(mistakes!!.contains(mistake))
         }
         @Test
         fun delete_from_database() = runBlocking(Dispatchers.IO) {
-            val mistake =Mistake(99973892, "dd","ss","1","ww","","")
+            val mistake =Mistake(99973892, "dd","ss","1","ww","","",0L)
             dao.insert(mistake)
             dao.delete(mistake)
             val mistakes = dao.getAllMistakesNonLiveData()
