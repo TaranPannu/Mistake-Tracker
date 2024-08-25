@@ -43,8 +43,8 @@ class DataSyncService: Service() {
 //              }
 //                Log.d("s2", "Done--")
 
-                val x1=     mistakeViewModel.RegisterUser(User("Tagdddhhddgnu","hh@gmail.com","Tanup888ggreet","Singgghhhgh","12gfdd3456"))
-
+//                val x1=     mistakeViewModel.RegisterUser(User("Tagdddhhddgnu","hh@gmail.com","Tanup888ggreet","Singgghhhgh","12gfdd3456"))
+val x1 = mistakeViewModel.getDetails()
 //val x1= mistakeViewModel.createNewEmployee
                     //(Mistake(12L,"","","","","","",12L))
 //                    val x1 =mistakeViewModel.getAllPosts()

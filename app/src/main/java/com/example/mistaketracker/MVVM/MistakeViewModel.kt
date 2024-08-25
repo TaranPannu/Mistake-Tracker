@@ -8,6 +8,7 @@ import com.example.mistaketracker.DataClass.AuthResponse
 import com.example.mistaketracker.DataClass.Login
 import com.example.mistaketracker.DataClass.Mistake
 import com.example.mistaketracker.DataClass.User
+import com.example.mistaketracker.DataClass.UserDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -50,31 +51,36 @@ return repo.getMistakebyId(Id)
         return repo.getMistakebyTimeStamp(timestamp)
     }
 
-    suspend fun getAllPosts():Response<List<Mistake>>
-    {
-        return repo.getAllPosts()
-    }
+//    suspend fun getAllPosts():Response<List<Mistake>>
+//    {
+//        return repo.getAllPosts()
+//    }
     suspend fun RegisterUser(user: User) :Response<AuthResponse>
     {
         return  repo.RegisterUser(user)
     }
 
-    suspend fun UpdateMistake(mistake: Mistake)
-    {
-        repo.UpdateMistake(mistake)
-    }
+//    suspend fun UpdateMistake(mistake: Mistake)
+//    {
+//        repo.UpdateMistake(mistake)
+//    }
     suspend fun Loginuser(user: Login): Response<AuthResponse>
     {
         return repo.Loginuser(user)
     }
 
-    fun saveJwtToken(context: Context, token: String) {
-       repo.saveJwtToken(context,token)
+    fun saveJwtToken(token: String) {
+       repo.saveJwtToken(token)
     }
 
-    fun getJwtToken(context: Context): String? {
+    fun getJwtToken(): String? {
 
-        return repo.getJwtToken(context)
+        return repo.getJwtToken()
 
+    }
+
+    suspend fun getDetails():Response<UserDetail>
+    {
+        return repo.getDetails()
     }
 }

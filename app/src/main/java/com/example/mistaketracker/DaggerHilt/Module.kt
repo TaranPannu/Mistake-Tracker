@@ -1,6 +1,8 @@
 package com.example.mistaketracker.DaggerHilt
 
 import android.content.Context
+import android.content.SharedPreferences
+import com.example.mistaketracker.MVVM.MistakeViewModel
 import com.example.mistaketracker.Retrofit.RetrofitServices
 import com.example.mistaketracker.Room.Dao
 import com.example.mistaketracker.Room.MistakeDatabase
@@ -10,60 +12,71 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import dagger.Module
+import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-@InstallIn(SingletonComponent::class)// module only excist till the application excist once the application finish, module will also be destroyed
+@InstallIn(SingletonComponent::class)// module only exist till the application excist once the application finish, module will also be destroyed
 @Module
-class Module {
+class Module
+    {
     @Provides
     @Singleton
-    fun provideMistakeDatabase(@ApplicationContext context: Context): MistakeDatabase {
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences
+    {
+        return context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+    }
+    @Provides
+    @Singleton
+    fun provideMistakeDatabase(@ApplicationContext context: Context): MistakeDatabase
+    {
         return MistakeDatabase.invoke(context)
     }
 
     @Provides
-    fun provideMistakeDao(database: MistakeDatabase): Dao {
+    fun provideMistakeDao(database: MistakeDatabase): Dao
+    {
         return database.getMistakeDao()
     }
 
-    @Singleton // single instance of retrofit will be throught the App..9
     @Provides
-    fun provideRetrofit(): Retrofit
+    @Singleton
+    fun provideOkHttpClient(sharedPreferences: SharedPreferences): OkHttpClient
     {
-        return Retrofit.Builder().baseUrl("**************").addConverterFactory(
-            GsonConverterFactory.create()).build()
+        return OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val request = chain.request()
+                val token = sharedPreferences.getString("jwt_token", null)
+                val newRequest = if (token != null) {
+                    request.newBuilder()
+                        .addHeader("Authorization", "Bearer $token")
+                        .build()
+                } else {
+                    request
+                }
+                chain.proceed(newRequest)
+            }
+            .build()
     }
 
-    @Singleton
     @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit
+    {
+        return Retrofit.Builder()
+            .baseUrl("http://10.0.0.126:8094")
+            .client(okHttpClient) // Add the OkHttpClient to the Retrofit instance
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
     fun provideRetrofitServices(retrofit: Retrofit): RetrofitServices
     {
         return retrofit.create(RetrofitServices::class.java)
     }
-//    private const val BASE_URL = "http://10.0.0.126:8091"
-//
-//    private val client = OkHttpClient.Builder()
-//        .addInterceptor { chain ->
-//            val request = chain.request()
-//            val jwtToken = "getJwtToken()" // Retrieve JWT token from storage
-//            val newRequest = request.newBuilder()
-//                .apply {
-//                    jwtToken?.let {
-//                        header("Authorization", "Bearer $it")
-//                    }
-//                }
-//                .build()
-//            chain.proceed(newRequest)
-//        }
-//        .build()
 
-
-//    @Singleton
-//    @Provides
-//    fun providesRepo(retrofitServices: RetrofitServices) : Repo
-//    {
-//        return Repo(retrofitServices)
-//    }
-
-}
+    }

@@ -14,8 +14,8 @@ android {
         applicationId = "com.taran.mistaketracker"
         minSdk = 25
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -143,7 +143,7 @@ dependencies {
     // Optional - Integration with ViewModels
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 //    // Optional - Integration with LiveData
-//    implementation("androidx.compose.runtime:runtime-livedata")
+    implementation("androidx.compose.runtime:runtime-livedata")
 //    // Optional - Integration with RxJava
 //    implementation("androidx.compose.runtime:runtime-rxjava2")
 

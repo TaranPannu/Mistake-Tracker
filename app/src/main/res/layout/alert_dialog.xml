@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="italic"
-        android:hint="10"
+        android:text="1"
         android:inputType="number"
         android:textColor="@color/white"
         android:textColorHint="@color/grey"
