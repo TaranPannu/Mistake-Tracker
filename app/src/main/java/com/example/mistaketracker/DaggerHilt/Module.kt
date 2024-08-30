@@ -66,7 +66,7 @@ class Module
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit
     {
         return Retrofit.Builder()
-            .baseUrl("http://10.0.0.126:8094")
+            .baseUrl("http://10.0.2.2:8090")
             .client(okHttpClient) // Add the OkHttpClient to the Retrofit instance
             .addConverterFactory(GsonConverterFactory.create())
             .build()

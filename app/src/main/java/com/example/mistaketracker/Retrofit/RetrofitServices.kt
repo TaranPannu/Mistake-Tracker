@@ -4,6 +4,7 @@ package com.example.mistaketracker.Retrofit
 import com.example.mistaketracker.DataClass.AuthResponse
 import com.example.mistaketracker.DataClass.Login
 import com.example.mistaketracker.DataClass.Mistake
+import com.example.mistaketracker.DataClass.UID
 import com.example.mistaketracker.DataClass.User
 import com.example.mistaketracker.DataClass.UserDetail
 import retrofit2.Response
@@ -16,8 +17,8 @@ interface RetrofitServices {
 //    @GET("/mistake")
 //    suspend fun getAllPosts(): Response<List<Mistake>>
 //
-////    @POST("/mistake")
-////    suspend fun createNewEmployee(@Body mistake: Mistake)
+    @POST("/mistake")
+    suspend fun InsertMistake(@Body mistake: Mistake): Response<UID>
 //
 //    @PUT("/mistake/update")
 //    suspend fun UpdateMistake(@Body mistake: Mistake)

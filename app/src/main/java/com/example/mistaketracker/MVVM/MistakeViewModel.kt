@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.mistaketracker.DataClass.AuthResponse
 import com.example.mistaketracker.DataClass.Login
 import com.example.mistaketracker.DataClass.Mistake
+import com.example.mistaketracker.DataClass.UID
 import com.example.mistaketracker.DataClass.User
 import com.example.mistaketracker.DataClass.UserDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import retrofit2.http.Body
 import javax.inject.Inject
 
 class MistakeViewModel @Inject constructor(var repo: Repo):ViewModel()
@@ -82,5 +84,10 @@ return repo.getMistakebyId(Id)
     suspend fun getDetails():Response<UserDetail>
     {
         return repo.getDetails()
+    }
+
+    suspend fun InsertMistake(@Body mistake: Mistake): Response<UID>
+    {
+        return repo.InsertMistake(mistake)
     }
 }

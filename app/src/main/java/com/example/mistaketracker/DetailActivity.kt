@@ -25,7 +25,12 @@ import kotlinx.coroutines.launch
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import androidx.core.content.ContextCompat
+import com.example.mistaketracker.utility.Online
 import dagger.hilt.android.AndroidEntryPoint
+import org.junit.runner.manipulation.Ordering.Context
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -43,6 +48,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var dialogButton: Button
     private lateinit var img: ImageView
     var img_path: String? = ""
+    var mistakeuid: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +66,7 @@ class DetailActivity : AppCompatActivity() {
         val mistake_id: Long = intent.getLongExtra("key", 0L)
         lifecycleScope.launch(Dispatchers.IO) {
             val mistake = mistakeViewModel.getMistakebyId(mistake_id)
+            mistakeuid = mistake.uid
             UpdateCurrentMistakeData(mistake)
         }
 
@@ -119,16 +126,27 @@ class DetailActivity : AppCompatActivity() {
 //                val editor = sharedPreferences.edit()
 //                editor.putLong("Time_Stamp", timestamp)
 //                editor.apply()
+                var mistakeObj =
+                    Mistake(
+                        mistake_id,
+                        mistakeuid,
+                        dialogTitle.text.toString(),
+                        category.text.toString(),
+                        count.text.toString(),
+                        detail.text.toString(),
+                        lesson.text.toString(), img_path.toString(), timestamp, false
+                    )
                 if (!(dialogTitle.text.toString() == "" || category.text.toString() == "" || count.text.toString() == "" || detail.text.toString() == "" || lesson.text.toString() == "")) {
-                    mistakeViewModel.update(
-                        Mistake(
-                            mistake_id,
-                            dialogTitle.text.toString(),
-                            category.text.toString(),
-                            count.text.toString(),
-                            detail.text.toString(),
-                            lesson.text.toString(), img_path.toString(),timestamp
+                    if (Online.isOnline(this@DetailActivity)) {
+                        val sharedPreferences = getSharedPreferences(
+                            "myPreferences",
+                            android.content.Context.MODE_PRIVATE
                         )
+                        mistakeObj.timestamp = sharedPreferences.getLong("Time_Stamp", 0L)
+                        mistakeViewModel.InsertMistake(mistakeObj) //basically update
+                    }
+                    mistakeViewModel.update(
+                        mistakeObj
                     )
                 }
             }

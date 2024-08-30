@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".DaggerHilt.ApplicationClass"
@@ -18,29 +19,42 @@
         android:theme="@style/Theme.MistakeTracker"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="true"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/Theme.MistakeTracker" >
+
+        </activity>
+        <activity
             android:name=".Auth.LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.MistakeTracker" >
+            android:theme="@style/Theme.MistakeTracker"></activity> <!-- <receiver -->
+        <!-- android:name=".utility.NetworkChangeReceiver" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="false"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <activity
+            android:name=".Auth.SignUpActivity"
+            android:exported="true"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/Theme.MistakeTracker"></activity>
+
+        <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Auth.SignUpActivity"
-            android:exported="true"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/Theme.MistakeTracker">
-
-        </activity>
-        <activity
-            android:name=".DetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">   </activity>
 
         <service android:name=".Services.DataSyncService" />
     </application>

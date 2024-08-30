@@ -52,7 +52,7 @@ class MistakeListFragment : Fragment(), ClickToOpenDetailActivity {
         startActivity(intent)
     }
 
-    override fun onClickIncreaseCount(mistake: Mistake) {
+    override fun onClickIncreaseCount(mistake: Mistake) { //count won't be shared
         lifecycleScope.launch(Dispatchers.IO) {
             mistake.timestamp = System.currentTimeMillis()
             mistake.count = ((mistake.count).toInt() + 1).toString()
@@ -70,7 +70,7 @@ class MistakeListFragment : Fragment(), ClickToOpenDetailActivity {
         Toast.makeText(context, "Mistake Count Decreased", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onClickDeleteMistake(mistake: Mistake, x: Int) {
+    override fun onClickDeleteMistake(mistake: Mistake, x: Int) { // Delete From Server
         if (x == 0) {
             Toast.makeText(context, "Hold the Delete Button", Toast.LENGTH_SHORT).show()
         } else {

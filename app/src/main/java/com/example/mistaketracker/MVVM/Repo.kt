@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.example.mistaketracker.DataClass.AuthResponse
 import com.example.mistaketracker.DataClass.Login
 import com.example.mistaketracker.DataClass.Mistake
+import com.example.mistaketracker.DataClass.UID
 import com.example.mistaketracker.DataClass.User
 import com.example.mistaketracker.DataClass.UserDetail
 import com.example.mistaketracker.Retrofit.RetrofitServices
@@ -76,4 +77,8 @@ class Repo @Inject constructor(
         return retrofitServices.getDetails()
     }
 
+    suspend fun InsertMistake(@Body mistake: Mistake): Response<UID>
+    {
+        return retrofitServices.InsertMistake(mistake)
+    }
 }
